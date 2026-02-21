@@ -466,7 +466,7 @@ DIAGRAM TYPE: Role-responsibility diagram with accountability flow.
 TWO MAIN ACTORS (left-right layout):
 
 LEFT BOX — "Human Orchestrator" (Deep Blue border, prominent):
-  Title: "Human Orchestrator\n(Tobias-Benedikt Blask)"
+  Title: "Human Orchestrator"
   Responsibilities (bullet list):
     "• Formulates research task"
     "• Approves/redirects at checkpoints"
