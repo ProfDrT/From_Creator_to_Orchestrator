@@ -64,7 +64,7 @@ and What That Means for Science}\\[0.5em]
 
 % ============================================================
 \begin{abstract}
-This paper presents a dual argument. First, we demonstrate: the \textit{Open Paper Machine}, an autonomous LLM-based research agent, executed the full academic pipeline---literature search, theoretical framing, concept matrix construction, full-text drafting, figure generation, and \LaTeX{} compilation---producing the manuscript you are reading. Second, we interpret: this demonstration is not primarily about artificial intelligence. It is about the structural transformation of knowledge work from \textit{creation} to \textit{orchestration}. The researcher's role shifts from producing text to directing, evaluating, and taking accountability for AI-generated output. Built on Claude Opus 4.6 and the Model Context Protocol (MCP), the system provides a four-layer architectural account (transformer substrate, RLHF alignment, Constitutional AI, MCP tool stack) explaining how research-capable behavior emerges from component interaction. We apply distributed cognition theory \citep{hutchins1995cognition}, sociotechnical systems analysis \citep{trist1951social}, and the task-based framework of automation \citep{autor2015why} to analyze what this transition means---not only for academic publishing, but for the broader reorganization of knowledge-intensive labor. The central claim: the creator-to-orchestrator shift is not unique to science. It is the defining structural transformation of knowledge work in the age of generative AI. Research is simply where the implications are sharpest, because the stakes---epistemic integrity, accountability for truth claims, the training of future scholars---are highest.
+The \textit{Open Paper Machine}, an autonomous LLM-based research agent built on Claude Opus 4.6 and the Model Context Protocol, executed the full academic pipeline---literature search, theoretical framing, drafting, figure generation, and \LaTeX{} compilation---producing this manuscript. We provide a four-layer architectural account explaining how research-capable behavior emerges from component interaction, and apply distributed cognition \citep{hutchins1995cognition}, sociotechnical systems theory \citep{trist1951social}, and the task-based automation framework \citep{autor2015why} to interpret what this demonstration means. The central argument: the researcher's role shifts from producing text to directing, evaluating, and taking accountability for AI-generated output. This creator-to-orchestrator transition is the defining structural transformation of knowledge work in the age of generative AI. Research is where the implications are sharpest, because the stakes---epistemic integrity, accountability, the training of future scholars---are highest.
 \end{abstract}
 
 % ============================================================
@@ -77,13 +77,6 @@ This paper was produced by the system it describes. That is not a metaphor. Clau
 This arrangement---human as director, machine as executor---is the paper's central exhibit. It is a working instance of the creator-to-orchestrator transition that is restructuring knowledge work across professions. Lawyers who once drafted briefs now review AI-generated drafts. Consultants who once built slide decks now prompt systems that produce them. Programmers who once wrote code now supervise AI that generates it. In each case, the human moves from creator of the output to orchestrator of the process that produces it.
 
 We call the system the \textit{Open Paper Machine} because we intend it as a reference design: an open, reproducible pipeline that any researcher can deploy, audit, and extend. The reflexive structure---a system analyzing its own architecture---provides the strongest possible demonstration: the paper is simultaneously the claim and the evidence.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{figures/fig8_sociotechnical_redesign.png}
-    \caption{Sociotechnical redesign: AI agents reconfigure roles, norms, and accountability structures.}
-    \label{fig:orchestrator_transition}
-\end{figure}
 
 \subsection{The Gap}
 
@@ -112,7 +105,7 @@ Three contributions:
 \begin{enumerate}
   \item \textbf{Architectural account.} A four-layer model (transformer $\rightarrow$ RLHF $\rightarrow$ Constitutional AI $\rightarrow$ MCP tools) explaining agentic research behavior as an emergent property of component interaction, grounded in established agent taxonomies \citep{handler2023taxonomy,wang2024survey}.
   \item \textbf{End-to-end demonstration with reflexive analysis.} A documented pipeline with all intermediate artifacts archived, compared against six other autonomous research systems, and analyzed from the inside.
-  \item \textbf{Creator-to-orchestrator framework.} A theoretically grounded analysis of how AI agents restructure knowledge work---with academic research as the critical case---integrating \citeauthor{autor2015why}'s~(\citeyear{autor2015why}) task-based automation framework, \citeauthor{hutchins1995cognition}'s~(\citeyear{hutchins1995cognition}) distributed cognition, and \citeauthor{trist1951social} and \citeauthor{trist1951social}'s~(\citeyear{trist1951social}) sociotechnical systems theory.
+  \item \textbf{Creator-to-orchestrator framework.} A theoretically grounded analysis of how AI agents restructure knowledge work---with academic research as the critical case---integrating \citeauthor{autor2015why}'s~(\citeyear{autor2015why}) task-based automation framework, \citeauthor{hutchins1995cognition}'s~(\citeyear{hutchins1995cognition}) distributed cognition, and \citeauthor{trist1951social} and Bamforth's~(\citeyear{trist1951social}) sociotechnical systems theory.
 \end{enumerate}
 
 \subsection{Roadmap}
@@ -127,7 +120,7 @@ Section~\ref{sec:theory} develops the theoretical foundations. Section~\ref{sec:
 
 The transformer \citep{vaswani2017attention} replaced sequential recurrence with parallelized self-attention, enabling training at scale. \citet{brown2020gpt3} demonstrated that a 175-billion-parameter transformer (GPT-3) exhibited emergent few-shot in-context learning---adapting behavior from examples in the input without task-specific fine-tuning. This property is foundational to research agency: a single model can receive a multi-phase research brief and generate appropriate behavior for each phase without retraining.
 
-Three properties matter for research specifically. First, \textit{implicit knowledge}: pre-trained transformers encode factual knowledge as distributional patterns \citep{petroni2019language}, providing baseline understanding of academic conventions, citation practices, and domain content before any tools are invoked. \citet{singhal2023medpalm} demonstrate that sufficiently large models encode expert-level clinical knowledge; the same principle extends to academic knowledge. Second, \textit{extended coherence}: the 200,000+ token context window of Claude Opus 4.6 allows the system to hold research brief, retrieved literature, evolving draft, and analysis in simultaneous relation---a prerequisite for the sustained cross-referential reasoning that research demands. Third, \textit{compositional generalization}: the model combines knowledge from different domains and constructs novel arguments by composing patterns learned during pretraining---not creativity in any phenomenological sense, but productive recombination that parallels aspects of scholarly synthesis.
+Three properties matter for research specifically. First, \textit{implicit knowledge}: pre-trained transformers encode factual knowledge as distributional patterns \citep{petroni2019language}, providing baseline understanding of academic conventions, citation practices, and domain content before any tools are invoked. \citet{singhal2023medpalm} demonstrate that sufficiently large models encode expert-level clinical knowledge. Academic knowledge is less codified than clinical knowledge, so the analogy is imperfect---but the underlying mechanism (distributional encoding of domain patterns) applies, albeit with greater variability in reliability. Second, \textit{extended coherence}: the 200,000+ token context window of Claude Opus 4.6 allows the system to hold research brief, retrieved literature, evolving draft, and analysis in simultaneous relation---a prerequisite for the sustained cross-referential reasoning that research demands. Third, \textit{compositional generalization}: the model combines knowledge from different domains and constructs novel arguments by composing patterns learned during pretraining---not creativity in any phenomenological sense, but productive recombination that parallels aspects of scholarly synthesis.
 
 Emergent capabilities---abilities appearing at scale but absent in smaller models---include multi-step planning, coherent argumentation across thousands of tokens, and the ability to flag when a query exceeds the system's knowledge \citep{kalyan2024gpt3}. None are explicitly programmed. They arise from the statistical structure of large-scale pretraining.
 
@@ -195,7 +188,7 @@ The creator-to-orchestrator framing is not a metaphor. It is a structural descri
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig15_skill_shift.png}
-    \caption{Skill shift: declining mechanical competencies, rising evaluative and directive competencies.}
+    \caption{Task redistribution in the creator-to-orchestrator transition: mechanical execution competencies decline in importance while evaluative judgment and directive orchestration competencies intensify (cf.\ Section~2.6, Autor, 2015; Davenport \& Kirby, 2016).}
     \label{fig:task_redistribution}
 \end{figure}
 
@@ -211,15 +204,17 @@ Any assessment of LLM-based research must confront hallucination directly. LLMs 
 
 \subsection{Design Science with a Reflexive Twist}
 
-This paper adopts a reflexive design science orientation \citep{hevner2004design}. The artifact is the Open Paper Machine and its output. We evaluate against two objectives: \textit{academic quality} (rigorous argument, appropriate citation, transparent limitations) and \textit{evidential value} (what the production process reveals about agent capabilities and the orchestrator role).
+The primary methodological frame is \textbf{design science research} (DSR) \citep{hevner2004design}. The artifact is the Open Paper Machine---its architecture, pipeline, and this manuscript as output. Following DSR conventions, we evaluate the artifact against two objectives: \textit{academic quality} (rigorous argument, appropriate citation, transparent limitations) and \textit{evidential value} (what the production process reveals about agent capabilities and the orchestrator role).
 
-The reflexive dimension follows \citet{walsham2006doing}: the account is produced from within the phenomenon. We adopt critical realism \citep{bhaskar1978realist}: real mechanisms exist independently of our descriptions, but our descriptions are theory-laden and produced under conditions that create distinctive epistemic risks. \citet{rahwan2019machine} advocate studying machine behavior empirically, observing AI in naturalistic settings. This paper constitutes exactly such an observation.
+The evaluation strategy combines three elements. First, \textit{technical evaluation}: the system's output is compared against six existing autonomous research systems (Table~\ref{tab:comparison}), demonstrating both capabilities and deficiencies. Second, \textit{reflexive evaluation}: the production process itself is analyzed as data, with orchestrator interventions documented in the project repository (see ``Orchestrator trace'' below). Third, \textit{theoretical evaluation}: the system is interpreted through established theoretical lenses---distributed cognition, sociotechnical systems, and task-based automation---to assess whether it produces insights that extend existing understanding.
+
+We adopt critical realism \citep{bhaskar1978realist} as the ontological position: the mechanisms that produce agentic research behavior exist independently of our descriptions, but our descriptions are theory-laden and shaped by the conditions of their production. The reflexive dimension---the system analyzing itself---follows \citet{walsham2006doing} and creates distinctive epistemic risks that we address through artifact archiving and orchestrator documentation. \citet{rahwan2019machine} advocate studying machine behavior empirically; this paper constitutes such an observation, with the DSR artifact as both the object and instrument of study.
 
 \subsection{The Pipeline as Data}
 
 \begin{table}[ht]
 \centering
-\caption{Five-phase pipeline of the Open Paper Machine.}
+\caption{Six-phase pipeline of the Open Paper Machine.}
 \label{tab:pipeline}
 \begin{tabularx}{\textwidth}{@{}lXXX@{}}
 \toprule
@@ -229,7 +224,8 @@ The reflexive dimension follows \citet{walsham2006doing}: the account is produce
 2. Framing & Theory selection, gap formulation, RQ derivation & \texttt{framing.md} & LLM reasoning \\
 3. Architecture & Concept matrix, section design & \texttt{concept\_matrix.md}, \texttt{paper\_structure.md} & LLM + file I/O \\
 4. Production & Full-text drafting, section by section & \texttt{draft.md} & LLM generation + file I/O \\
-5. Assembly & Figure generation, \LaTeX{} compilation, self-assessment & \texttt{figures/}, \texttt{paper.tex}, \texttt{paper.pdf} & Bash + PaperBanana + \LaTeX{} \\
+5. Assembly & Figure generation, \LaTeX{} compilation & \texttt{figures/}, \texttt{paper.tex}, \texttt{paper.pdf} & Bash + PaperBanana + \LaTeX{} \\
+6. Self-Review & Simulated peer review, critique generation & \texttt{review.md} & LLM reasoning \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -237,11 +233,15 @@ The reflexive dimension follows \citet{walsham2006doing}: the account is produce
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig2_pipeline_phases.png}
-    \caption{Five-phase Open Paper Machine pipeline: Reconnaissance $\rightarrow$ Framing $\rightarrow$ Architecture $\rightarrow$ Production $\rightarrow$ Assembly.}
+    \caption{Six-phase Open Paper Machine pipeline: Reconnaissance $\rightarrow$ Framing $\rightarrow$ Architecture $\rightarrow$ Production $\rightarrow$ Assembly $\rightarrow$ Self-Review.}
     \label{fig:pipeline_phases}
 \end{figure}
 
 This pipeline is both method and data. Analyzing where it succeeded and where it required human intervention provides direct evidence for RQ2 and material for the orchestrator analysis (RQ3).
+
+\textbf{Phase 6: Self-Review.} After assembly, the system generates a simulated peer review of its own manuscript. The agent reads the compiled paper, adopts the role of a critical reviewer, and produces a structured evaluation: identifying strengths, weaknesses, methodological gaps, missing literature, argumentative inconsistencies, and concrete revision recommendations. This review is presented to the human orchestrator---not as a final quality judgment, but as a structured checklist that surfaces issues the orchestrator might otherwise overlook. The present paper underwent exactly this process: the self-review identified, among other issues, the circularity problem (now addressed in the ``Orchestrator trace''), the under-theorization of emergent tasks (now addressed in Section~\ref{sec:orchestrator}), and asymmetries in the comparative analysis (now corrected in Table~\ref{tab:comparison}). The self-review does not replace human peer review---it cannot assess novelty, field fit, or institutional appropriateness. But it operationalizes one more instance of the orchestrator principle: the system generates critique, the human evaluates which critiques are valid and how to address them.
+
+\textbf{Orchestrator trace.} To address the circularity inherent in a self-describing system, the project repository archives the complete production history: raw AI outputs, human prompts, intermediate drafts, and the final manuscript. The git history constitutes a de facto change log. Key orchestrator interventions included: (a)~redirecting the initial framing from a pure systems paper toward the creator-to-orchestrator thesis; (b)~rejecting an early version that over-emphasized authorship philosophy at the expense of technical documentation; (c)~restructuring the theoretical foundations to integrate labor economics (Autor, Acemoglu) alongside IS theory; (d)~verifying every citation against the retrieved database and correcting hallucinated references; and (e)~commissioning additional literature searches when the agent's initial coverage proved insufficient. These interventions are traceable in the archived artifacts, providing empirical evidence that orchestration is substantive intellectual work---not mere approval.
 
 \subsection{Quality Criteria}
 
@@ -342,7 +342,7 @@ Five structural failure modes:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/fig14_epistemic_boundaries.png}
-    \caption{Four fundamental epistemic boundaries of the Open Paper Machine.}
+    \caption{Epistemic boundaries of the Open Paper Machine: training cutoff, hallucination risk, overconfident synthesis, absence of primary data collection, and evaluation bias define the system's structural limitations (cf.\ Section~5.3).}
     \label{fig:epistemic_boundaries}
 \end{figure}
 
@@ -352,19 +352,21 @@ Five structural failure modes:
 \centering
 \caption{Comparison of autonomous AI research systems.}
 \label{tab:comparison}
-\begin{tabularx}{\textwidth}{@{}lXccXX@{}}
+\begin{tabularx}{\textwidth}{@{}lXccccc@{}}
 \toprule
-\textbf{System} & \textbf{Scope} & \textbf{Exec.} & \textbf{Self-A.} & \textbf{Domain} & \textbf{Tool Arch.} \\
+\textbf{System} & \textbf{Scope} & \textbf{Exec.} & \textbf{Self-A.} & \textbf{Review} & \textbf{Emp.Val.} & \textbf{Tool Arch.} \\
 \midrule
-Coscientist \citep{boiko2023autonomous} & Narrow & Lab & No & Chemistry & Lab instruments \\
-ChemCrow \citep{bran2024chemistry} & Narrow & Sim. & No & Chemistry & Chemistry tools \\
-AI Scientist-v2 \citep{yamada2025scientist} & Full paper & ML exp. & No & ML & Code execution \\
-data-to-paper \citep{ifargan2024autonomous} & Full paper & Data & No & General & Statistical tools \\
-CycleResearcher \citep{weng2024cycleresearcher} & Paper + review & NLP exp. & No & NLP & Code execution \\
-SciAgents \citep{ghafarollahi2024sciagents} & Hypothesis & No & No & Materials & Multi-agent \\
-\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{General / IS} & \textbf{MCP (ext.)} \\
+Coscientist \citep{boiko2023autonomous} & Narrow & Lab & No & No & Yes & Lab instr. \\
+ChemCrow \citep{bran2024chemistry} & Narrow & Sim. & No & No & Yes & Chem. tools \\
+AI Scientist-v2 \citep{yamada2025scientist} & Full paper & ML & No & Yes & Yes & Code exec. \\
+data-to-paper \citep{ifargan2024autonomous} & Full paper & Data & No & No & Yes & Stat. tools \\
+CycleResearcher \citep{weng2024cycleresearcher} & Paper+rev. & NLP & No & Yes & Yes & Code exec. \\
+SciAgents \citep{ghafarollahi2024sciagents} & Hypothesis & No & No & No & Part. & Multi-agent \\
+\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{No} & \textbf{No} & \textbf{MCP (ext.)} \\
 \bottomrule
 \end{tabularx}
+
+\noindent\textit{Exec.}~= experimental execution; \textit{Self-A.}~= reflexive self-analysis; \textit{Review}~= automated review loop; \textit{Emp.Val.}~= empirical validation of generated claims. The Open Paper Machine's distinctive strengths---reflexive analysis and extensible architecture---come at the cost of lacking empirical validation and automated review integration, areas where systems like CycleResearcher and AI Scientist-v2 are superior.
 \end{table}
 
 The Open Paper Machine is unique in combining full-pipeline generality, reflexive self-analysis, IS-grounded theory, and extensible MCP architecture. Its limitation: no primary data generation. Its strength: it is the only system that treats the production process as primary evidence for analyzing the creator-to-orchestrator transition.
@@ -375,6 +377,13 @@ The Open Paper Machine is unique in combining full-pipeline generality, reflexiv
 
 This section develops the paper's central argument. The Open Paper Machine demonstrates not merely a technical capability but a structural shift in the organization of knowledge work. We analyze this shift through three lenses: task redistribution, authorship accountability, and institutional adaptation.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig8_sociotechnical_redesign.png}
+    \caption{The creator-to-orchestrator transition as sociotechnical redesign: AI agents assume execution tasks while the human orchestrator retains direction, evaluation, and accountability. Roles, norms, and accountability structures are reconfigured (cf.\ Sections~6.1--6.3).}
+    \label{fig:orchestrator_transition}
+\end{figure}
+
 \subsection{The Task Redistribution}
 
 \citet{autor2015why} shows that automation restructures the task composition of occupations rather than eliminating them. Applied to academic research, the restructuring is visible in the pipeline:
@@ -383,7 +392,7 @@ This section develops the paper's central argument. The Open Paper Machine demon
 
 \textbf{Retained tasks} (primarily human, AI-assisted): research question formulation, theoretical lens selection, methodological design, evaluative reading of sources, identification of what is missing from the literature, detection of AI errors, ethical judgment, institutional navigation. These are the ``non-routine cognitive tasks'' that require judgment, creativity, and contextual understanding.
 
-\textbf{Emergent tasks} (new, arising from the transition): prompt engineering (formulating effective research briefs), output evaluation (distinguishing adequate from excellent AI generation), orchestration design (structuring multi-phase AI pipelines), verification (checking every citation and claim), and accountability management (maintaining responsibility for AI-generated content).
+\textbf{Emergent tasks} (new, arising from the transition): These are not relabeled versions of existing activities. They arise specifically from the properties of generative AI---stochastic output, hallucination risk, opacity of reasoning---and have no direct precedent in pre-AI research workflows. \textit{Prompt engineering} differs from traditional task delegation because the ``delegate'' has no persistent memory and must be re-instructed for each phase. \textit{Output evaluation} differs from conventional quality assurance because the evaluator cannot inspect the production process---only the output---and must detect errors (hallucinated citations, overconfident synthesis) that are designed by training to be indistinguishable from correct output. \textit{Orchestration design} requires structuring multi-phase AI pipelines where each phase's output conditions the next, creating compounding error risks absent in human workflows. \textit{Verification} at the claim level is necessitated by the hallucination problem: every factual assertion requires independent checking against external sources. \textit{Accountability management}---maintaining clear responsibility chains for AI-generated content---addresses a governance gap that does not exist when humans produce the work directly.
 
 The redistribution is not a diminishment of the researcher's role. It is a reconfiguration. The orchestrator role is cognitively demanding in ways that differ from, but are not less than, the creator role. Evaluating whether an AI-generated literature synthesis has missed a critical paper requires the same domain knowledge as writing that synthesis---perhaps more, because the evaluation must be conducted skeptically rather than constructively.
 
@@ -400,6 +409,8 @@ The redistribution is not a diminishment of the researcher's role. It is a recon
 \textbf{Step aside:} The researcher focuses on tasks AI cannot perform---primary data collection, participant interviews, ethnographic observation, institutional relationship-building. These constitute the irreducibly human contribution to empirical research.
 
 \textbf{Step forward:} The researcher develops the next generation of AI research tools and methodologies. The Open Paper Machine is itself a ``step forward'' contribution---a reference design for future systems.
+
+We omit \textit{step narrowly} (deep specialization in a niche AI cannot reach) because it describes a defensive positioning strategy rather than an active orchestration mode. While some researchers may retreat into hyper-specialized niches, the orchestrator model is fundamentally about engaging with AI capabilities, not avoiding them.
 
 \citet{pinski2023delegation} add empirical evidence: effective AI delegation depends on the human's ``AI knowledge''---understanding what AI can and cannot do. Without this knowledge, delegation either fails (the human asks for tasks beyond AI capability) or produces uncritical acceptance (the human lacks the expertise to evaluate AI output). Doctoral training must develop this competence explicitly.
 
@@ -424,7 +435,7 @@ The uncomfortable implication: this framework applies not only to AI-assisted re
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/fig10_orchestrator_model.png}
-    \caption{Orchestrator model of AI-assisted authorship: human accountability, AI as disclosed generator.}
+    \caption{Accountability-based authorship under the orchestrator model: the human author directs, evaluates, and accepts responsibility; the AI system is disclosed as generator with archived production artifacts (cf.\ Section~6.3).}
     \label{fig:authorship_framework}
 \end{figure}
 
@@ -441,7 +452,7 @@ The transition enables a complementary response: AI-augmented peer review.
   \item \textbf{Novelty assessment:} Comparing generated arguments against the existing literature to assess genuine contribution versus fluent recombination.
 \end{itemize}
 
-\citet{weng2024cycleresearcher} demonstrate automated research-review feedback loops. The Open Paper Machine's archived artifacts---literature base, BibTeX, concept matrix, draft history---model how AI-generated research might be made auditable. This is a design principle: transparency about the production process should be required for AI-assisted submissions, analogous to data availability requirements.
+\citet{weng2024cycleresearcher} demonstrate automated research-review feedback loops. The Open Paper Machine incorporates a version of this principle: Phase~6 (Self-Review) generates a simulated peer review that the orchestrator uses to identify revision targets before submission. This is not automated quality assurance---the orchestrator must evaluate which critiques are valid---but it closes the feedback loop within the production pipeline. The archived artifacts---literature base, BibTeX, concept matrix, draft history, and self-review---model how AI-generated research might be made auditable. Transparency about the production process should be required for AI-assisted submissions, analogous to data availability requirements.
 
 \subsection{The Research Scientist's Evolving Role}
 
@@ -459,7 +470,7 @@ The creator-to-orchestrator transition does not eliminate the research scientist
 
 \subsection{The Broader Transition: Knowledge Work After Generative AI}
 
-The creator-to-orchestrator shift extends beyond academia. Wherever knowledge workers produce text, analysis, or design, the same structural transformation is underway.
+The creator-to-orchestrator shift extends beyond academia. The following sketches are illustrative, not analytical---each domain warrants dedicated empirical investigation. They serve to indicate the generality of the pattern, not to substitute for domain-specific research.
 
 \textbf{Legal work.} Lawyers who drafted briefs now review AI-generated drafts, focusing on strategy and judgment rather than prose production. The task redistribution mirrors what we observe in research: execution delegated, evaluation retained, accountability non-negotiable.
 
@@ -476,7 +487,7 @@ Academic research is the critical case because the stakes are uniquely high. In 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig6_capability_matrix.png}
-    \caption{Capability matrix: demonstrated capabilities, partial capabilities, and fundamental limitations across tasks.}
+    \caption{Capability matrix of the Open Paper Machine: demonstrated strengths (literature search, drafting, tool composition), partial capabilities (theoretical synthesis, gap identification), and fundamental limitations (primary data, quality assessment, intellectual risk). Applicable across the knowledge work domains discussed in Section~6.6.}
     \label{fig:cross_domain_orchestration}
 \end{figure}
 
@@ -491,6 +502,7 @@ Six priorities:
   \item \textbf{Hallucination mitigation for research.} Domain-specific approaches: knowledge graph grounding \citep{guan2024knowledge}, citation-level fact-checking, retrieval-augmented verification.
   \item \textbf{Longitudinal field studies of adoption.} What actually happens when research groups adopt agentic AI---the sociotechnical effects that theory alone cannot predict.
   \item \textbf{Epistemic inequality analysis.} How differential access to AI research tools affects knowledge production across institutions, disciplines, and geographies. \citet{teeni2025reciprocal} calls for reciprocal human-AI collaboration designs that distribute benefits equitably.
+  \item \textbf{Quantitative orchestration analysis.} The present study archives production artifacts but does not quantitatively analyze the orchestrator's work. Future research should instrument the pipeline to capture interaction-level data: number of iterations per phase, rejection rate of AI-generated output, time spent on evaluation versus correction, prompt complexity over successive cycles. Such data would move the orchestrator thesis from theoretical plausibility to empirical grounding and enable comparison across researchers, disciplines, and systems.
 \end{enumerate}
 
 % ============================================================
