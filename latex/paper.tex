@@ -214,9 +214,10 @@ We adopt critical realism \citep{bhaskar1978realist} as the ontological position
 
 \begin{table}[ht]
 \centering
+\small
 \caption{Six-phase pipeline of the Open Paper Machine.}
 \label{tab:pipeline}
-\begin{tabularx}{\textwidth}{@{}lXXX@{}}
+\begin{tabularx}{\textwidth}{@{} l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X @{}}
 \toprule
 \textbf{Phase} & \textbf{Activities} & \textbf{Artifacts} & \textbf{Tools} \\
 \midrule
@@ -350,9 +351,10 @@ Five structural failure modes:
 
 \begin{table}[ht]
 \centering
+\small
 \caption{Comparison of autonomous AI research systems.}
 \label{tab:comparison}
-\begin{tabularx}{\textwidth}{@{}lXccccc@{}}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}X l c c c c >{\raggedright\arraybackslash}p{2.2cm} @{}}
 \toprule
 \textbf{System} & \textbf{Scope} & \textbf{Exec.} & \textbf{Self-A.} & \textbf{Review} & \textbf{Emp.Val.} & \textbf{Tool Arch.} \\
 \midrule
@@ -362,11 +364,12 @@ AI Scientist-v2 \citep{yamada2025scientist} & Full paper & ML & No & Yes & Yes &
 data-to-paper \citep{ifargan2024autonomous} & Full paper & Data & No & No & Yes & Stat. tools \\
 CycleResearcher \citep{weng2024cycleresearcher} & Paper+rev. & NLP & No & Yes & Yes & Code exec. \\
 SciAgents \citep{ghafarollahi2024sciagents} & Hypothesis & No & No & No & Part. & Multi-agent \\
-\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{No} & \textbf{No} & \textbf{MCP (ext.)} \\
+\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{Part.} & \textbf{No} & \textbf{MCP (ext.)} \\
 \bottomrule
 \end{tabularx}
 
-\noindent\textit{Exec.}~= experimental execution; \textit{Self-A.}~= reflexive self-analysis; \textit{Review}~= automated review loop; \textit{Emp.Val.}~= empirical validation of generated claims. The Open Paper Machine's distinctive strengths---reflexive analysis and extensible architecture---come at the cost of lacking empirical validation and automated review integration, areas where systems like CycleResearcher and AI Scientist-v2 are superior.
+\vspace{0.5em}
+\footnotesize\noindent\textit{Exec.}~= experimental execution; \textit{Self-A.}~= reflexive self-analysis; \textit{Review}~= automated review loop; \textit{Emp.Val.}~= empirical validation of generated claims. The Open Paper Machine's distinctive strengths---reflexive analysis and extensible architecture---come at the cost of lacking empirical validation and automated review integration, areas where systems like CycleResearcher and AI Scientist-v2 are superior.
 \end{table}
 
 The Open Paper Machine is unique in combining full-pipeline generality, reflexive self-analysis, IS-grounded theory, and extensible MCP architecture. Its limitation: no primary data generation. Its strength: it is the only system that treats the production process as primary evidence for analyzing the creator-to-orchestrator transition.
