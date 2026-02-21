@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__rube__RUBE_SEARCH_TOOLS",
+      "mcp__rube__RUBE_MULTI_EXECUTE_TOOL",
+      "Bash(curl:*)",
+      "Bash(/Library/TeX/texbin/pdflatex:*)",
+      "Bash(/Library/TeX/texbin/bibtex:*)",
+      "Bash(python3:*)",
+      "Bash(ls:*)",
+      "Bash(sort:*)",
+      "Bash(for f in \"/Users/tobias-benediktblask/2026 Paper Agent Claude Code/figures/\"fig*.png)",
+      "Bash(do cp \"$f\" \"/Users/tobias-benediktblask/2026 Paper Agent Claude Code/latex/figures/\")",
+      "Bash(done)",
+      "Bash(open:*)"
+    ]
+  }
+}
