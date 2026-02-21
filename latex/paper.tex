@@ -78,7 +78,12 @@ This arrangement---human as director, machine as executor---is the paper's centr
 
 We call the system the \textit{Open Paper Machine} because we intend it as a reference design: an open, reproducible pipeline that any researcher can deploy, audit, and extend. The reflexive structure---a system analyzing its own architecture---provides the strongest possible demonstration: the paper is simultaneously the claim and the evidence.
 
-% [FIGURE PLACEHOLDER: fig_orchestrator_transition — Side-by-side comparison of Creator Model vs. Orchestrator Model showing the structural shift in knowledge work]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig8_sociotechnical_redesign.png}
+    \caption{Sociotechnical redesign: AI agents reconfigure roles, norms, and accountability structures.}
+    \label{fig:orchestrator_transition}
+\end{figure}
 
 \subsection{The Gap}
 
@@ -126,7 +131,12 @@ Three properties matter for research specifically. First, \textit{implicit knowl
 
 Emergent capabilities---abilities appearing at scale but absent in smaller models---include multi-step planning, coherent argumentation across thousands of tokens, and the ability to flag when a query exceeds the system's knowledge \citep{kalyan2024gpt3}. None are explicitly programmed. They arise from the statistical structure of large-scale pretraining.
 
-% [FIGURE PLACEHOLDER: fig_four_layer_architecture — Vertical stack showing the four layers: Transformer Substrate, RLHF Alignment, Constitutional AI, MCP Tool Stack, with emergence annotation]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/fig1_architecture_layers.png}
+    \caption{Four-layer architecture: transformer substrate $\rightarrow$ RLHF $\rightarrow$ Constitutional AI $\rightarrow$ MCP tool stack.}
+    \label{fig:four_layer_architecture}
+\end{figure}
 
 \subsection{Alignment: From RLHF to Constitutional AI}
 
@@ -182,7 +192,12 @@ Sociotechnical systems theory \citep{trist1951social} holds that technology and 
 
 The creator-to-orchestrator framing is not a metaphor. It is a structural description of how the task composition of knowledge work changes when generative AI assumes execution-level tasks. The knowledge worker retains---and in some cases intensifies---the tasks that require judgment, accountability, domain expertise, and institutional context. What disappears is the monopoly on execution.
 
-% [FIGURE PLACEHOLDER: fig_task_redistribution — Two-column comparison showing task bars for Creator Model vs. Orchestrator Model with split-colored AI/human allocation]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig15_skill_shift.png}
+    \caption{Skill shift: declining mechanical competencies, rising evaluative and directive competencies.}
+    \label{fig:task_redistribution}
+\end{figure}
 
 \subsection{The Hallucination Problem}
 
@@ -219,7 +234,12 @@ The reflexive dimension follows \citet{walsham2006doing}: the account is produce
 \end{tabularx}
 \end{table}
 
-% [FIGURE PLACEHOLDER: fig_pipeline_phases — Horizontal flow diagram showing the five phases with artifacts and human intervention points]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig2_pipeline_phases.png}
+    \caption{Five-phase Open Paper Machine pipeline: Reconnaissance $\rightarrow$ Framing $\rightarrow$ Architecture $\rightarrow$ Production $\rightarrow$ Assembly.}
+    \label{fig:pipeline_phases}
+\end{figure}
 
 This pipeline is both method and data. Analyzing where it succeeded and where it required human intervention provides direct evidence for RQ2 and material for the orchestrator analysis (RQ3).
 
@@ -319,7 +339,12 @@ Five structural failure modes:
   \item \textbf{Evaluation bias.} Self-assessment shaped by the same training that produced the capabilities assessed. Self-reported limitations are a lower bound.
 \end{enumerate}
 
-% [FIGURE PLACEHOLDER: fig_epistemic_boundaries — Concentric circles/bullseye showing Reliable Zone, Caution Zone, Failure Zone, and Human Domain]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/fig14_epistemic_boundaries.png}
+    \caption{Four fundamental epistemic boundaries of the Open Paper Machine.}
+    \label{fig:epistemic_boundaries}
+\end{figure}
 
 \subsection{Comparative Analysis}
 
@@ -396,7 +421,12 @@ This framework aligns with \citeauthor{asatiani2021envelopment}'s~(\citeyear{asa
 
 The uncomfortable implication: this framework applies not only to AI-assisted research but to all research involving significant delegation. Senior professors who lend their names to papers written primarily by doctoral students operate under a structurally similar arrangement. The orchestrator model makes this delegation explicit and accountable rather than obscured by convention.
 
-% [FIGURE PLACEHOLDER: fig_authorship_framework — Flow diagram showing Accountable Author, AI Generator, and Audit Layer with accountability relationships]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/fig10_orchestrator_model.png}
+    \caption{Orchestrator model of AI-assisted authorship: human accountability, AI as disclosed generator.}
+    \label{fig:authorship_framework}
+\end{figure}
 
 \subsection{Peer Review in the Orchestrator Age}
 
@@ -443,7 +473,12 @@ In each domain, the pattern is the same: execution tasks are delegated, judgment
 
 Academic research is the critical case because the stakes are uniquely high. In other domains, a mediocre AI-generated output is a quality problem. In research, a hallucinated citation or a fabricated finding is an integrity violation. The research community's response to the orchestrator transition will therefore serve as a template---or a cautionary tale---for other knowledge-intensive professions.
 
-% [FIGURE PLACEHOLDER: fig_cross_domain_orchestration — Matrix showing Delegated/Retained/Emergent tasks across Research, Law, Consulting, Software, Medicine]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig6_capability_matrix.png}
+    \caption{Capability matrix: demonstrated capabilities, partial capabilities, and fundamental limitations across tasks.}
+    \label{fig:cross_domain_orchestration}
+\end{figure}
 
 \subsection{Research Agenda}
 
