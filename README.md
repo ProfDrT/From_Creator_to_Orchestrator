@@ -152,9 +152,15 @@ claude
 ├── concept_matrix.md           # Webster & Watson concept matrix
 ├── paper_structure.md          # Section architecture
 ├── literature_base.csv         # Retrieved literature database
+├── plugin/                     # Open Academic Paper Machine (Claude Code plugin)
+│   ├── .claude-plugin/         # Plugin manifest (plugin.json)
+│   ├── agents/                 # Paper-machine agent (6-phase pipeline)
+│   ├── commands/               # 7 slash commands (/write-paper, /export-latex, ...)
+│   ├── skills/                 # 6 skill engines (writing, literature, theory, ...)
+│   ├── scripts/                # md_to_latex.py converter
+│   └── templates/              # arxiv.sty template
 ├── regen_figures.py            # Figure regeneration script
-├── .env                        # API keys (not committed)
-└── paperbanana-src/            # Local PaperBanana source
+└── .env                        # API keys (not committed)
 ```
 
 ## Citation

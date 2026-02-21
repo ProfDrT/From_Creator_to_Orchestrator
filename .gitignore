@@ -24,5 +24,8 @@ outputs/
 *.toc
 .DS_Store
 
+# PaperBanana local source (install via pip instead)
+paperbanana-src/
+
 # Helper scripts
 update_paper.py
