@@ -136,7 +136,7 @@ Emergent capabilities---abilities appearing at scale but absent in smaller model
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/fig1_architecture_layers.png}
-    \caption{Four-layer architecture: transformer substrate $\rightarrow$ RLHF $\rightarrow$ Constitutional AI $\rightarrow$ MCP tool stack.}
+    \caption{Four-layer architecture: transformer base $\rightarrow$ RLHF alignment $\rightarrow$ Constitutional AI $\rightarrow$ MCP tool stack. Layers~1--3 are training contributions baked into the deployed model; Layer~4 is a runtime extension.}
     \label{fig:four_layer_architecture}
 \end{figure}
 
@@ -197,7 +197,7 @@ The creator-to-orchestrator framing is not a metaphor. It is a structural descri
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig15_skill_shift.png}
-    \caption{Task redistribution in the creator-to-orchestrator transition: mechanical execution competencies decline in importance while evaluative judgment and directive orchestration competencies intensify (cf.\ Section~2.6, Autor, 2015; Davenport \& Kirby, 2016).}
+    \caption{Task redistribution in the creator-to-orchestrator transition: mechanical execution competencies decline in importance while evaluative judgment and directive orchestration competencies intensify. Note: ``intensifying'' competencies like research question formulation are not delegated tasks but \textit{evaluative} ones---the orchestrator assesses the viability and quality of AI-proposed framings rather than generating them from scratch (cf.\ Section~2.6; Autor, 2015; Davenport \& Kirby, 2016).}
     \label{fig:task_redistribution}
 \end{figure}
 
@@ -208,6 +208,36 @@ Any assessment of LLM-based research must confront hallucination directly. LLMs 
 \citet{zhang2025hallucination} classify hallucinations as input-conflicting, context-conflicting, and fact-conflicting. For research agents, fact-conflicting hallucinations are most dangerous---internally coherent and stylistically appropriate while factually wrong. \citet{li2023halueval} provide HaluEval, confirming that even state-of-the-art models hallucinate across task types. The scale of the problem is quantified by \citet{asai2024openscholar}: without retrieval augmentation, GPT-4o fabricates citations 78--90\% of the time on scientific synthesis tasks. Their OpenScholar system demonstrates that retrieval-augmented generation (RAG) over a datastore of 45 million open-access papers reduces citation hallucination to near-expert levels, achieving factual accuracy on par with human-written Wikipedia paragraphs in the ScholarQABench evaluation.
 
 \citet{guan2024knowledge} propose knowledge graph grounding as a complementary mitigation strategy. The Open Paper Machine's architecture implements a variant of the RAG approach validated by OpenScholar: every citation originates from live API responses (Semantic Scholar, OpenAlex, CrossRef, arXiv) with real DOIs and metadata, not from the model's parametric memory. This architectural decision---retrieval-first citation rather than generation-first citation---addresses the dominant failure mode. However, synthesis, argumentation, and interpretation remain products of generation and therefore carry inherent hallucination risk. \citet{agarwal2024litllm} and \citet{dasilva2024ai} survey the broader landscape of retrieval-augmented tools for scientific literature work, confirming that grounded retrieval is emerging as the standard mitigation architecture.
+
+\subsection{Related Systems}
+
+Table~\ref{tab:comparison} positions the Open Paper Machine relative to seven existing autonomous AI research systems. The comparison clarifies what is shared (tool-augmented generation, iterative refinement) and what distinguishes our approach (reflexive self-analysis, IS-grounded theory, extensible MCP architecture).
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Comparison of autonomous AI research systems.}
+\label{tab:comparison}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}X l c c c c >{\raggedright\arraybackslash}p{2.2cm} @{}}
+\toprule
+\textbf{System} & \textbf{Scope} & \textbf{Exec.} & \textbf{Self-A.} & \textbf{Review} & \textbf{Emp.Val.} & \textbf{Tool Arch.} \\
+\midrule
+Coscientist \citep{boiko2023autonomous} & Narrow & Lab & No & No & Yes & Lab instr. \\
+ChemCrow \citep{bran2024chemistry} & Narrow & Sim. & No & No & Yes & Chem. tools \\
+AI Scientist-v2 \citep{yamada2025scientist} & Full paper & ML & No & Yes & Yes & Code exec. \\
+data-to-paper \citep{ifargan2024autonomous} & Full paper & Data & No & No & Yes & Stat. tools \\
+CycleResearcher \citep{weng2024cycleresearcher} & Paper+rev. & NLP & No & Yes & Yes & Code exec. \\
+SciAgents \citep{ghafarollahi2024sciagents} & Hypothesis & No & No & No & Part. & Multi-agent \\
+OpenScholar \citep{asai2024openscholar} & Synthesis & No & No & No & Yes & RAG (45M papers) \\
+\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{Part.} & \textbf{No} & \textbf{MCP (ext.)} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5em}
+\footnotesize\noindent\textit{Exec.}~= experimental execution; \textit{Self-A.}~= reflexive self-analysis; \textit{Review}~= automated review loop; \textit{Emp.Val.}~= empirical validation of generated claims.
+\end{table}
+
+The Open Paper Machine is unique in combining full-pipeline generality, reflexive self-analysis, and extensible MCP architecture. Its limitation: no primary data generation. Its strength: it is the only system that treats the production process as primary evidence for analyzing the creator-to-orchestrator transition.
 
 % ============================================================
 \clearpage
@@ -227,9 +257,13 @@ We adopt critical realism \citep{bhaskar1978realist} as the ontological position
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig2_pipeline_phases.png}
-    \caption{Six-phase Open Paper Machine pipeline: Reconnaissance $\rightarrow$ Framing $\rightarrow$ Architecture $\rightarrow$ Production $\rightarrow$ Assembly $\rightarrow$ Self-Review.}
+    \caption{Six-phase Open Paper Machine pipeline: Reconnaissance $\rightarrow$ Framing $\rightarrow$ Architecture $\rightarrow$ Production $\rightarrow$ Assembly $\rightarrow$ Self-Review. The human orchestrator (not shown) operates across all phases: approving checkpoints, redirecting the agent, verifying outputs, and making editorial decisions that shape the final result.}
     \label{fig:pipeline_phases}
 \end{figure}
+
+Each phase produces persistent Markdown artifacts that serve as both intermediate outputs and inputs to subsequent phases: Phase~1 generates \texttt{literature\_base.md} (concept matrix, paper summaries, citation metadata); Phase~2 produces \texttt{theoretical\_framework.md} (selected lenses, gap statement, research questions); Phase~3 yields \texttt{paper\_architecture.md} (section outline, argument structure, figure plan); Phase~4 outputs \texttt{draft.md} (the full manuscript in academic Markdown with citation keys); Phase~5 compiles \texttt{references.bib} and the final \LaTeX{} project; Phase~6 generates \texttt{self\_review.md} (simulated peer review). These artifacts are plain-text by design---inspectable, diffable, and version-controlled---enabling the orchestrator to trace exactly how each phase's output shaped the next.
+
+The orchestrator role spans all six phases as an overarching activity: the human approves each phase's checkpoint before the agent proceeds, redirects the pipeline when intermediate outputs are unsatisfactory, and makes judgment calls that the agent surfaces but cannot resolve (e.g., which theoretical lens fits the IS audience, whether a gap statement is genuinely novel). The pipeline is deterministic in structure but contingent on orchestrator decisions at every transition.
 
 This pipeline is both method and data. Analyzing where it succeeded and where it required human intervention provides direct evidence for RQ2 and material for the orchestrator analysis (RQ3). Phase~6 (Self-Review) deserves elaboration because it closes the feedback loop: after assembly, the system generates a simulated peer review of its own manuscript, identifying strengths, weaknesses, methodological gaps, missing literature, and argumentative inconsistencies. This review is presented to the human orchestrator---not as a final quality judgment, but as a structured checklist that surfaces issues the orchestrator might otherwise overlook. The present paper underwent exactly this process: the self-review identified, among other issues, the circularity problem (now addressed in the ``Orchestrator trace''), the under-theorization of emergent tasks (now addressed in Section~\ref{sec:orchestrator}), and asymmetries in the comparative analysis (now corrected in Table~\ref{tab:comparison}). The self-review does not replace human peer review---it cannot assess novelty, field fit, or institutional appropriateness. But it operationalizes one more instance of the orchestrator principle: the system generates critique, the human evaluates which critiques are valid and how to address them.
 
@@ -237,16 +271,19 @@ This pipeline is both method and data. Analyzing where it succeeded and where it
 
 \subsection{Quality Criteria}
 
-Four criteria, adapted from and extending \citet{lincoln1985naturalistic}, who propose credibility, transferability, dependability, and confirmability. We retain three of these and replace dependability with reflexivity, given the unique epistemic situation of a self-describing AI system:
+Five criteria. The first four follow \citet{lincoln1985naturalistic}; the fifth addresses the unique epistemic situation of a self-describing AI system:
 
 \begin{itemize}
   \item \textbf{Credibility:} Transparent process, traceable artifacts, established theoretical grounding.
   \item \textbf{Transferability:} Open-source codebase enables replication assessment. The production system is released as a reusable Claude Code plugin (\url{https://github.com/ProfDrT/open-paper-machine}).
+  \item \textbf{Dependability:} The pipeline is deterministic in structure (six phases, fixed tool set) though stochastic in output. Dependability is established through artifact archiving: any researcher can inspect the same inputs and trace how outputs were produced.
   \item \textbf{Confirmability:} All intermediate artifacts archived for independent audit.
-  \item \textbf{Reflexivity} (replacing dependability)\textbf{:} Explicit acknowledgment that the system cannot introspect its own weights or training data. Its self-assessment is shaped by the same training that produced the capabilities being assessed.
+  \item \textbf{Reflexivity} (supplementary)\textbf{:} Explicit acknowledgment that the system cannot introspect its own weights or training data. Its self-assessment is shaped by the same training that produced the capabilities being assessed. This is not a quality criterion in the traditional sense but a methodological caveat that must accompany all findings.
 \end{itemize}
 
-\subsection{Ethics}
+\subsection{Ethical Considerations}
+
+The reflexive design---an AI system analyzing its own production---raises distinctive ethical questions that we address upfront rather than deferring to the discussion.
 
 \textbf{Authorship.} The authors (Blask and Funk) take full responsibility for the published content. Claude Opus 4.6 is disclosed as the text generator. The system cannot accept moral or legal accountability, and current norms \citep{flanagin2023nonhuman} preclude AI authorship. This is not merely a pragmatic accommodation---it instantiates the orchestrator model: the human retains accountability precisely because the human retains evaluative authority.
 
@@ -258,19 +295,19 @@ Four criteria, adapted from and extending \citet{lincoln1985naturalistic}, who p
 \section{Architecture: Four Layers of the Open Paper Machine}
 \label{sec:architecture}
 
-The four layers interact rather than sum. The research agent emerges from their interaction. From a distributed cognition perspective, the agent is the extended cognitive system: model + tools + human + academic infrastructure. Remove any component and the system degrades. This emergent character means capabilities are not portable across arbitrary recombinations.
+We decompose the system into four layers. The first three---transformer base, RLHF alignment, and Constitutional AI---are not runtime modules but successive \textit{training contributions} that jointly constitute Claude Opus~4.6 as a deployable model. We separate them analytically because each contributes distinct, observable behavioral properties to research agency. The fourth layer---MCP tools---is a genuine runtime extension. Together, the four layers form an extended cognitive system \citep{hutchins1995cognition}: model + tools + human orchestrator + academic infrastructure. Remove any component and the system degrades.
 
-\subsection{Layer 1---The Transformer Substrate}
+\subsection{Layer 1---The Transformer Base}
 
 Claude Opus 4.6 uses a decoder-only transformer \citep{vaswani2017attention}. Three properties enable research agency. \textbf{Unified context:} the 200,000+ token window holds research brief, literature, draft, and analysis simultaneously---a prerequisite for cross-referential reasoning. \textbf{Autoregressive coherence:} each token conditioned on all preceding tokens creates sequential consistency across thousands of words. \textbf{Implicit knowledge:} pretraining on academic text provides baseline understanding of conventions, concepts, and citation practices \citep{liu2022pretrain,petroni2019language}.
 
 \subsection{Layer 2---RLHF Alignment}
 
-RLHF \citep{ouyang2022rlhf} shapes three research-relevant dispositions: \textit{helpfulness} (substantive analysis rather than generic hedging), \textit{honesty} (uncertainty acknowledgment rather than confabulation), and \textit{harmlessness} (proactive limitation disclosure). These are sociotechnically designed dispositions---products of human evaluator judgments embedded through iterative training \citep{gabriel2020ai,franceschelli2024rl}.
+RLHF \citep{ouyang2022rlhf} is a training procedure, not a runtime module---but it produces behavioral dispositions that are directly observable during research execution. The procedure shapes three research-relevant properties: \textit{helpfulness} (substantive analysis rather than generic hedging), \textit{honesty} (uncertainty acknowledgment rather than confabulation), and \textit{harmlessness} (proactive limitation disclosure). These dispositions emerge from human evaluator judgments embedded through iterative training \citep{gabriel2020ai,franceschelli2024rl}. We treat RLHF as a distinct layer because a base transformer without alignment training would generate fluent but epistemically unreliable text---the alignment step is what makes research-quality generation possible.
 
 \subsection{Layer 3---Constitutional AI}
 
-CAI \citep{bai2022constitutional} trains the model to evaluate its own output against normative principles. For research, this produces self-monitoring: flagging uncertain claims, acknowledging failures, inserting verification markers. The practical result---hedging language, explicit limitations, uncertainty markers---operationalizes epistemically cautious generation. \citet{mokander2023auditing} propose a three-layered auditing framework (governance, model, application) applicable to CAI-trained research agents.
+Like RLHF, Constitutional AI (CAI) \citep{bai2022constitutional} is a training contribution baked into the deployed model. Its distinct mechanism: the model is trained to critique its own outputs against explicit normative principles---for example, ``avoid making claims not supported by the provided sources'' or ``acknowledge uncertainty rather than fabricating plausible-sounding answers.'' The training loop (generate $\rightarrow$ self-critique $\rightarrow$ revise $\rightarrow$ train on revisions via RLAIF) embeds normative self-regulation into the generative process. The observable result during research execution: hedging language when evidence is thin, explicit limitation statements, uncertainty markers, and refusal to fabricate citations when retrieval fails. We separate CAI from RLHF analytically because RLHF optimizes for human \textit{preferences} (the behavioral floor), while CAI optimizes for adherence to \textit{principles} (the normative ceiling)---a distinction with practical consequences for research integrity. \citet{mokander2023auditing} propose a three-layered auditing framework (governance, model, application) applicable to CAI-trained research agents.
 
 \subsection{Layer 4---The MCP Tool Stack}
 
@@ -291,7 +328,7 @@ Visualization & PaperBanana (via MCP) & Figure generation from text descriptions
 \end{tabularx}
 \end{table}
 
-The ReAct loop \citep{yao2022react} orchestrates tool use: ${\sim}$12 cycles in Phase~1 alone. MCP's modularity---any MCP-compatible tool integrates without model modification---makes the system extensible: a design choice, not a fixed capability.
+The ReAct loop \citep{yao2022react} orchestrates tool use through repeated Reason~$\rightarrow$ Act~$\rightarrow$ Observe cycles. A concrete example from Phase~1 (Reconnaissance): the agent reasons that it needs literature on ``AI research automation,'' calls the Semantic Scholar API, observes 47 results, reasons that coverage of sociotechnical theory is thin, calls OpenAlex with revised terms, observes 23 additional papers, deduplicates, and ranks by citation count---approximately 12 such cycles before the literature base stabilizes. MCP's modularity---any MCP-compatible tool integrates without model modification---makes the system extensible: a design choice, not a fixed capability.
 
 % ============================================================
 \section{Capabilities and Failure Modes}
@@ -325,44 +362,16 @@ Five structural failure modes:
   \item \textbf{Training cutoff.} Parametric knowledge frozen at training time. Post-cutoff developments only partially compensated by retrieval.
   \item \textbf{Hallucination.} Fabricated citations, plausible but inaccurate claims \citep{alkaissi2023hallucinations,zhang2025hallucination,li2023halueval}. All claims require human verification.
   \item \textbf{Overconfident synthesis.} Sweeping claims that elide contradictions, null results, and methodological limitations in underlying work.
-  \item \textbf{No primary data.} Cannot conduct interviews, experiments, or surveys. Fundamentally archival and synthetic.
+  \item \textbf{No primary data (current).} Cannot conduct interviews, experiments, or surveys---the system is fundamentally archival and synthetic \citep{zheng2025automation}. This is a limitation of the current architecture, not a permanent boundary: API-accessible survey platforms (e.g., Prolific, MTurk) could in principle be integrated as MCP tools, enabling agent-administered questionnaires. Primary data collection is therefore an engineering problem, not an impossibility---but one with significant ethical implications (informed consent, IRB oversight) that would require dedicated governance design.
   \item \textbf{Evaluation bias.} Self-assessment shaped by the same training that produced the capabilities assessed. Self-reported limitations are a lower bound.
 \end{enumerate}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/fig14_epistemic_boundaries.png}
-    \caption{Epistemic boundaries of the Open Paper Machine: training cutoff, hallucination risk, overconfident synthesis, absence of primary data collection, and evaluation bias define the system's structural limitations (cf.\ Section~5.3).}
+    \caption{Five epistemic boundaries of the Open Paper Machine, arranged as a pentagon with human orchestration as the enclosing frame. The pentagonal layout reflects the five distinct limitations identified in Section~\ref{sec:capabilities}.3; the circular enclosure indicates that \textit{all} boundaries require continuous human oversight---none can be mitigated by the system alone.}
     \label{fig:epistemic_boundaries}
 \end{figure}
-
-\subsection{Comparative Analysis}
-
-\begin{table}[ht]
-\centering
-\small
-\caption{Comparison of autonomous AI research systems.}
-\label{tab:comparison}
-\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}X l c c c c >{\raggedright\arraybackslash}p{2.2cm} @{}}
-\toprule
-\textbf{System} & \textbf{Scope} & \textbf{Exec.} & \textbf{Self-A.} & \textbf{Review} & \textbf{Emp.Val.} & \textbf{Tool Arch.} \\
-\midrule
-Coscientist \citep{boiko2023autonomous} & Narrow & Lab & No & No & Yes & Lab instr. \\
-ChemCrow \citep{bran2024chemistry} & Narrow & Sim. & No & No & Yes & Chem. tools \\
-AI Scientist-v2 \citep{yamada2025scientist} & Full paper & ML & No & Yes & Yes & Code exec. \\
-data-to-paper \citep{ifargan2024autonomous} & Full paper & Data & No & No & Yes & Stat. tools \\
-CycleResearcher \citep{weng2024cycleresearcher} & Paper+rev. & NLP & No & Yes & Yes & Code exec. \\
-SciAgents \citep{ghafarollahi2024sciagents} & Hypothesis & No & No & No & Part. & Multi-agent \\
-OpenScholar \citep{asai2024openscholar} & Synthesis & No & No & No & Yes & RAG (45M papers) \\
-\textbf{Open Paper Machine} & \textbf{Full paper} & \textbf{No} & \textbf{Yes} & \textbf{Part.} & \textbf{No} & \textbf{MCP (ext.)} \\
-\bottomrule
-\end{tabularx}
-
-\vspace{0.5em}
-\footnotesize\noindent\textit{Exec.}~= experimental execution; \textit{Self-A.}~= reflexive self-analysis; \textit{Review}~= automated review loop; \textit{Emp.Val.}~= empirical validation of generated claims. OpenScholar demonstrates that RAG over 45M papers achieves near-expert citation accuracy on synthesis tasks, validating the retrieval-first approach adopted by the Open Paper Machine. The Open Paper Machine's distinctive strengths---reflexive analysis, full-pipeline generality, and extensible MCP architecture---come at the cost of lacking empirical validation and automated review integration, areas where systems like CycleResearcher and AI Scientist-v2 are superior.
-\end{table}
-
-The Open Paper Machine is unique in combining full-pipeline generality, reflexive self-analysis, IS-grounded theory, and extensible MCP architecture. Its limitation: no primary data generation. Its strength: it is the only system that treats the production process as primary evidence for analyzing the creator-to-orchestrator transition.
 
 % ============================================================
 \section{From Creator to Orchestrator: The Transition and Its Implications}
