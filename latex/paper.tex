@@ -219,25 +219,6 @@ We adopt critical realism \citep{bhaskar1978realist} as the ontological position
 
 \subsection{The Pipeline as Data}
 
-\begin{table}[ht]
-\centering
-\small
-\caption{Six-phase pipeline of the Open Paper Machine.}
-\label{tab:pipeline}
-\begin{tabularx}{\textwidth}{@{} l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X @{}}
-\toprule
-\textbf{Phase} & \textbf{Activities} & \textbf{Artifacts} & \textbf{Tools} \\
-\midrule
-1. Reconnaissance & Parallel DB searches, deduplication, ranking & \texttt{literature\_base.csv}, \texttt{references.bib} & OpenAlex, CrossRef, arXiv, Semantic Scholar \\
-2. Framing & Theory selection, gap formulation, RQ derivation & \texttt{framing.md} & LLM reasoning \\
-3. Architecture & Concept matrix, section design & \texttt{concept\_matrix.md}, \texttt{paper\_structure.md} & LLM + file I/O \\
-4. Production & Full-text drafting, section by section & \texttt{draft.md} & LLM generation + file I/O \\
-5. Assembly & Figure generation, \LaTeX{} compilation & \texttt{figures/}, \texttt{paper.tex}, \texttt{paper.pdf} & Bash + PaperBanana + \LaTeX{} \\
-6. Self-Review & Simulated peer review, critique generation & \texttt{review.md} & LLM reasoning \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig2_pipeline_phases.png}
@@ -245,9 +226,7 @@ We adopt critical realism \citep{bhaskar1978realist} as the ontological position
     \label{fig:pipeline_phases}
 \end{figure}
 
-This pipeline is both method and data. Analyzing where it succeeded and where it required human intervention provides direct evidence for RQ2 and material for the orchestrator analysis (RQ3).
-
-\textbf{Phase 6: Self-Review.} After assembly, the system generates a simulated peer review of its own manuscript. The agent reads the compiled paper, adopts the role of a critical reviewer, and produces a structured evaluation: identifying strengths, weaknesses, methodological gaps, missing literature, argumentative inconsistencies, and concrete revision recommendations. This review is presented to the human orchestrator---not as a final quality judgment, but as a structured checklist that surfaces issues the orchestrator might otherwise overlook. The present paper underwent exactly this process: the self-review identified, among other issues, the circularity problem (now addressed in the ``Orchestrator trace''), the under-theorization of emergent tasks (now addressed in Section~\ref{sec:orchestrator}), and asymmetries in the comparative analysis (now corrected in Table~\ref{tab:comparison}). The self-review does not replace human peer review---it cannot assess novelty, field fit, or institutional appropriateness. But it operationalizes one more instance of the orchestrator principle: the system generates critique, the human evaluates which critiques are valid and how to address them.
+This pipeline is both method and data. Analyzing where it succeeded and where it required human intervention provides direct evidence for RQ2 and material for the orchestrator analysis (RQ3). Phase~6 (Self-Review) deserves elaboration because it closes the feedback loop: after assembly, the system generates a simulated peer review of its own manuscript, identifying strengths, weaknesses, methodological gaps, missing literature, and argumentative inconsistencies. This review is presented to the human orchestrator---not as a final quality judgment, but as a structured checklist that surfaces issues the orchestrator might otherwise overlook. The present paper underwent exactly this process: the self-review identified, among other issues, the circularity problem (now addressed in the ``Orchestrator trace''), the under-theorization of emergent tasks (now addressed in Section~\ref{sec:orchestrator}), and asymmetries in the comparative analysis (now corrected in Table~\ref{tab:comparison}). The self-review does not replace human peer review---it cannot assess novelty, field fit, or institutional appropriateness. But it operationalizes one more instance of the orchestrator principle: the system generates critique, the human evaluates which critiques are valid and how to address them.
 
 \textbf{Orchestrator trace.} To address the circularity inherent in a self-describing system, the project repository archives the complete production history: raw AI outputs, human prompts, intermediate drafts, and the final manuscript. The git history constitutes a de facto change log. Key orchestrator interventions included: (a)~redirecting the initial framing from a pure systems paper toward the creator-to-orchestrator thesis; (b)~rejecting an early version that over-emphasized authorship philosophy at the expense of technical documentation; (c)~restructuring the theoretical foundations to integrate labor economics (Autor, Acemoglu) alongside IS theory; (d)~verifying every citation against the retrieved database and correcting hallucinated references; and (e)~commissioning additional literature searches when the agent's initial coverage proved insufficient. These interventions are traceable in the archived artifacts, providing empirical evidence that orchestration is substantive intellectual work---not mere approval.
 
@@ -273,6 +252,8 @@ Four criteria, adapted from and extending \citet{lincoln1985naturalistic}, who p
 % ============================================================
 \section{Architecture: Four Layers of the Open Paper Machine}
 \label{sec:architecture}
+
+The four layers interact rather than sum. The research agent emerges from their interaction. From a distributed cognition perspective, the agent is the extended cognitive system: model + tools + human + academic infrastructure. Remove any component and the system degrades. This emergent character means capabilities are not portable across arbitrary recombinations.
 
 \subsection{Layer 1---The Transformer Substrate}
 
@@ -306,10 +287,6 @@ Visualization & PaperBanana (via MCP) & Figure generation from text descriptions
 \end{table}
 
 The ReAct loop \citep{yao2022react} orchestrates tool use: ${\sim}$12 cycles in Phase~1 alone. MCP's modularity---any MCP-compatible tool integrates without model modification---makes the system extensible: a design choice, not a fixed capability.
-
-\subsection{Emergence}
-
-The four layers interact rather than sum. The research agent emerges from their interaction. From a distributed cognition perspective, the agent is the extended cognitive system: model + tools + human + academic infrastructure. Remove any component and the system degrades. This emergent character means capabilities are not portable across arbitrary recombinations.
 
 % ============================================================
 \section{Capabilities and Failure Modes}
@@ -504,7 +481,7 @@ Academic research is the critical case because the stakes are uniquely high. In 
 
 \subsection{Research Agenda}
 
-Six priorities:
+Seven priorities:
 
 \begin{enumerate}
   \item \textbf{Multi-agent research pipelines.} Specialized sub-agents for retrieval, analysis, writing, and review \citep{handler2023taxonomy,aminiranjbar2025dawn}. Empirical investigation of whether multi-agent architectures improve upon single-agent performance.
