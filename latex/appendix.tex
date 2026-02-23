@@ -163,7 +163,16 @@ The arrow should instead be labeled ``Generated Content''---describing the AI's 
 
 \subsection{The Corrected Figure}
 
-The regenerated version (Figure~\ref{fig:authorship_framework} in the main text) replaces the erroneous ``Accountability'' arrow with ``Generated Content'' and ensures that the only accountability arrow flows from the Human Author to the Published Output. This episode demonstrates three properties of the orchestrator model:
+The agent regenerated the figure via PaperBanana with explicit instructions that no accountability arrow may originate from the AI System. The corrected version (Figure~\ref{fig:fig6_corrected}) replaces the erroneous ``Accountability'' arrow with ``Generated Content'' and ensures that the only accountability arrow flows from the Human Author to the Published Output.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/fig10_orchestrator_model.png}
+    \caption{Corrected version of the orchestrator model (v2). The ``Accountability'' arrow now flows exclusively from the Human Author to the Published Output. The AI System contributes ``Generated Content'' but bears no accountability. Compare with the flawed version in Figure~\ref{fig:fig6_flawed}.}
+    \label{fig:fig6_corrected}
+\end{figure}
+
+This episode demonstrates three properties of the orchestrator model:
 
 \begin{enumerate}
     \item \textbf{AI systems can produce conceptually inconsistent artifacts.} The figure generation model (Gemini) optimized for visual clarity but lacked the semantic understanding to recognize that an ``accountability'' arrow from a non-accountable entity violated the paper's argument.
