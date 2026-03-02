@@ -8,7 +8,7 @@
 \section{Plugin Architecture: The Open Paper Machine}
 \label{app:plugin}
 
-This appendix documents the \textit{Open Paper Machine specifically}---its plugin structure and orchestration dialogue. For general background on transformer architecture, RLHF, and Constitutional AI, see Section~\ref{sec:theory}.
+This appendix documents the \textit{Open Paper Machine specifically}---its plugin structure and orchestration dialogue. For general background on transformer architecture, RLHF, and Constitutional AI, see Section~\ref{sec:tech}.
 
 The Open Paper Machine is a Claude Code plugin comprising 3{,}938 lines of prompt engineering, orchestration logic, and conversion utilities distributed across 18 files. The complete source is archived at \url{https://github.com/ProfDrT/open-paper-machine}.
 
@@ -55,7 +55,7 @@ The pipeline produces the following intermediate artifacts, all version-controll
   \item \texttt{references.bib} --- BibTeX entries for all cited papers (Phase 1)
   \item \texttt{framing.md} --- Theory selection, gap formulation, research questions (Phase 2)
   \item \texttt{concept\_matrix.md} --- Webster \& Watson concept matrix (Phase 3)
-  \item \texttt{paper\_structure.md} --- Section architecture with word budget (Phase 3)
+  \item \texttt{paper\_structure.md} --- Section structure with word budget (Phase 3)
   \item \texttt{draft.md} --- Complete paper draft as Markdown (Phase 4)
   \item \texttt{figures/} --- PaperBanana-generated diagrams, 300 DPI PNG (Phase 5)
   \item \texttt{latex/paper.tex} --- arxiv-style LaTeX source (Phase 5)
@@ -64,57 +64,7 @@ The pipeline produces the following intermediate artifacts, all version-controll
   \item \texttt{verification\_report.md} --- Citation verification results (optional Phase 7)
 \end{itemize}
 
-% ============================================================
-\section{Prototypical Orchestrator--Agent Dialogue}
-\label{app:dialogue}
-
-The following exchange illustrates the orchestrator--agent interaction pattern during Phase~1 (Reconnaissance). The human provides a research topic; the agent autonomously executes literature search, makes framing decisions, and presents results at a checkpoint. Formatting is lightly edited for readability; the substantive content is verbatim.
-
-\vspace{0.5em}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{0.3em}
-
-\noindent\textbf{Orchestrator:}\\
-\textit{/write-paper From Creator to Orchestrator: How an LLM Agent Wrote This Paper and What That Means for Science}
-
-\vspace{0.4em}
-\noindent\textbf{Agent} (Phase 1 --- Reconnaissance):\\
-Starting systematic literature search. Generating 6 query variations across theoretical, empirical, and methodological dimensions.
-
-\begin{quote}
-\small
-\texttt{Query 1:} ``LLM agent academic paper writing automation'' $\rightarrow$ 47 results (Semantic Scholar)\\
-\texttt{Query 2:} ``AI-assisted research methodology design science'' $\rightarrow$ 31 results (OpenAlex)\\
-\texttt{Query 3:} ``large language model scientific knowledge production'' $\rightarrow$ 52 results (CrossRef)\\
-\texttt{Query 4:} ``autonomous AI agent tool use MCP'' $\rightarrow$ 18 results (arXiv)\\
-\texttt{Query 5:} ``human-AI collaboration knowledge work orchestration'' $\rightarrow$ 29 results (Semantic Scholar)\\
-\texttt{Query 6:} ``generative AI authorship accountability'' $\rightarrow$ 36 results (OpenAlex)
-\end{quote}
-
-After deduplication: 148 unique papers. Snowballing on top-5 cited papers added 23 more. Final corpus: 171 candidates.
-
-Screening by title/abstract relevance: 62 papers retained for the concept matrix.
-
-\textbf{Checkpoint:} Literature base saved to \texttt{literature\_base.csv} (171 entries) and \texttt{references.bib} (62 entries). The corpus covers four domains: (1)~LLM capabilities and limitations, (2)~AI-assisted research tools, (3)~automation and knowledge work, (4)~authorship ethics and accountability. Shall I proceed with framing?
-
-\vspace{0.4em}
-\noindent\textbf{Orchestrator:}\\
-\textit{Looks good. Proceed.}
-
-\vspace{0.4em}
-\noindent\textbf{Agent} (Phase 2 --- Framing):\\
-Selected theoretical lenses: (1)~Sociotechnical envelopment \citep{asatiani2021envelopment} for the human--AI accountability structure; (2)~Task redistribution framework \citep{autor2015why,acemoglu2018automation} for analyzing which research tasks shift from human to machine. Design Science Research \citep{hevner2004design} as methodological frame: the paper itself is the artifact; the pipeline is the design.
-
-Research gap: Existing work treats LLMs as either assistive tools or autonomous threats. No study has documented a \textit{complete}, \textit{observable}, \textit{replicable} AI research pipeline while simultaneously theorizing the implications for scientific practice.
-
-\textbf{Checkpoint:} Framing saved to \texttt{framing.md}. Three research questions derived. Proceeding to architecture.
-
-\vspace{0.3em}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{0.5em}
-
-This pattern---autonomous execution with checkpoint-based approval---repeats across all six phases. The orchestrator's interventions are evaluative (``Looks good'', ``Redirect the framing toward\ldots'', ``Add a subsection on\ldots'') rather than directive. The agent makes and documents decisions; the orchestrator retains judgment and accountability.
-
+% [R3: Appendix B (Prototypical Dialogue) deleted per Burkhardt — orchestrator role appeared too passive in the example]
 
 % ============================================================
 \section{Orchestrator--Agent Interaction Timeline}
@@ -138,8 +88,8 @@ This appendix documents the complete sequence of substantive orchestrator--agent
 3 & Phase 1 & A & Corpus approved: 62 papers retained for concept matrix. \\[0.3em]
 4 & Phase 2 & D & \textbf{Key redirect.} Agent frames paper as pure systems description. \textit{Orchestrator rejects} and redirects toward creator-to-orchestrator thesis---the substantive intellectual decision that shaped the entire argument. \\[0.3em]
 5 & Phase 2 & V & \textit{Orchestrator} evaluates theory selection (distributed cognition, sociotechnical systems, Autor). Approves combination; adds Scarbrough (2024) as missing empirical complement. \\[0.3em]
-6 & Phase 3 & V & \textit{Orchestrator} reviews section architecture. Rebalances word budget: reduces technology description (\S4), expands discussion (\S6). \\[0.3em]
-7 & Phase 3 & A & Architecture approved: 8 sections, $\sim$10{,}000 words. \\[0.3em]
+6 & Phase 3 & V & \textit{Orchestrator} reviews section structure. Rebalances word budget: reduces technology description (\S4), expands discussion (\S6). \\[0.3em]
+7 & Phase 3 & A & Structure approved: 8 sections, $\sim$10{,}000 words. \\[0.3em]
 8 & Phase 4 & C & \textit{Orchestrator} spot-checks citations against retrieved abstracts. Identifies 4 hallucinated claims (correct paper, incorrect attributed finding). Agent corrects. \\[0.3em]
 9 & Phase 4 & V & \textit{Orchestrator} evaluates prose quality. Flags ``intellectual risk'' deficit: too hedged, too balanced. Instructs agent to sharpen provocative arguments (esp.\ \S6.2 desk research). \\[0.3em]
 10 & Phase 5 & C & \textbf{Figure correction.} Co-author identifies conceptual error: ``accountability'' arrow from AI System to Published Output contradicts core argument. Agent confirms error, regenerates figure. \\[0.3em]
